@@ -73,3 +73,6 @@ note:hover>span{
     animation-fill-mode: both;
   }
   
+img{
+    max-width: 800px;
+}
