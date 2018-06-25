@@ -12,4 +12,8 @@ class Task extends Model
     {
         return $this->belongsTo(Project::class);
     }
+    function image()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

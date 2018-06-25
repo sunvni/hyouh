@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RelationType extends Migration
+class ImageNote extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,16 @@ class RelationType extends Migration
      */
     public function up()
     {
-        Schema::create('relations_type', function (Blueprint $table) {
+        Schema::create('image_note', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('name');
+            $table->integer('image_id');
+            $table->float('pos_top');
+            $table->float('pos_left');
+            $table->float('width');
+            $table->float('height');
+            $table->text('comment');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +33,6 @@ class RelationType extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relations_type');
+        Schema::dropIfExists('image_note');
     }
 }

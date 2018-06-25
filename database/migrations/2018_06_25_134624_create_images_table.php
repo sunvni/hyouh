@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RelationType extends Migration
+class CreateImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class RelationType extends Migration
      */
     public function up()
     {
-        Schema::create('relations_type', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('name');
+            $table->integer('task_id');
+            $table->string('file_path');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class RelationType extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('relations_type');
+        Schema::dropIfExists('images');
     }
 }

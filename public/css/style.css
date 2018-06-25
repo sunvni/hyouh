@@ -1,0 +1,75 @@
+#container{
+    border: 1px solid #c3c3c3;
+    cursor: crosshair;
+    position: relative;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    float: left;
+}
+.note{    
+    display: none;
+}
+.note, .noted{
+    position: absolute;
+    min-width: 10px;
+    min-height: 10px;
+    text-align: left;
+    border: 2px solid #f00;
+    border-radius: 6px;
+    box-sizing: content-box;
+    background-color: rgba(255,0,0,0.15);
+    z-index: 100;
+}
+.note:hover,.noted:hover{
+    background-color: rgba(252,252,82,0.15);
+    border-color: #ffba00;
+}
+.note:hover{    
+    cursor: move;
+}
+.noted:hover{    
+    cursor: pointer;
+}
+note:hover>span{
+    background-color: #ffba00;
+    color: #fff;
+}
+#note_content
+{
+    display: none;
+}
+.drawing {
+    position:    absolute;
+    background: transparent;
+    border: 2px dotted green;
+  }
+  .form
+  {
+      display: none;
+      float: left;
+      width: 48%;
+      border: #c3c3c3;
+      padding: 15px;
+
+  }
+  .tip-num{
+    font-size: 12px;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    line-height: 1.6em;
+    cursor: default;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    animation-name: bounce;
+    transform-origin: center bottom;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+  

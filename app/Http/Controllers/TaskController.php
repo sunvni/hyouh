@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use App\Image;
+use App\ImageNote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
@@ -134,5 +136,59 @@ class TaskController extends Controller
         $project_id = $task->project_id;
         $task->delete();
         return Redirect::route('project.show',$project_id);
+    }
+
+    /**
+     * Add image to task
+     * 
+     * @param \App\Task $task
+     * @return \Illuminate\Http\Response
+     */
+    public function addImage(Task $task)
+    {
+        return view("Task.Image.add",compact('task'));
+    }
+
+    /**
+     * Store added image to task
+     * 
+     * @param \App\Task $task
+     * @return \Illuminate\Http\Response
+     */
+    public function storeImage(Request $request)
+    {
+        $data = $request->get('image');
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+
+        $filename = "images/clb".date("Y-m-d_H-i-s", time()).".png";
+        file_put_contents($filename, $data); 
+        $image = new Image;
+
+        $image->task_id = $request->get('task_id');
+        $image->file_path = $filename;
+        $image->save();
+        return Redirect::route('task.show',$image->task_id);
+        
+    }
+
+    public function editImage(Image $image)
+    {
+        return view('Task.Image.Edit',compact('image'));
+    }
+
+    public function addNote(Request $request)
+    {
+        $note = new ImageNote;
+        $image_id = Input::get('image_id');
+        $note->pos_top = Input::get('pos_top');
+        $note->pos_left = Input::get('pos_left');
+        $note->width = Input::get('width');
+        $note->height = Input::get('height');
+        $note->comment = Input::get('comment');
+        $note->image_id = $image_id;
+        $note->save();
+        return Redirect::route('task.image.edit',$image_id);
     }
 }

@@ -33,4 +33,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('task/{task}','TaskController@show')->name('task.show');
 
     Route::get('task/{task}/edit','TaskController@edit')->name('task.edit');
+    
+    Route::get('task/{task}/image/add','TaskController@addImage')->name('task.image.add');
+
+    Route::post('task/{task}/image/','TaskController@storeImage')->name('task.image.store');
+
+    Route::get('image/{image}/edit','TaskController@editImage')->name('task.image.edit');
+
+    Route::post('image/{image}','TaskController@addNote')->name('task.image.addnote');
+    
 });
