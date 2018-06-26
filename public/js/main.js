@@ -1,6 +1,26 @@
 
 $(function() {
-    $(document).tooltip();
+    //activeToolTip($(document));
+
+
+    $(".noted").on("mouseover",function(e){        
+        $(e.target).find('.fa-trash').show();
+        console.log($(e.target).find('.fa-trash').removeClass('hide'))
+    })
+
+    $(".noted").on("mouseleave", function () {
+        $(this).find('.fa-trash').addClass('hide');
+    })
+
+    $('.fa-trash').on('click',function(e)
+    {
+        var noted = $(e.target).closest('.noted');
+        console.log(noted.data('id'));
+        noted.hide();
+    })
+
+
+
     $("#image").get(0).draggable = false;
     console.log("OK");
     var $container = $('#container');
@@ -75,12 +95,7 @@ $(function() {
                     }
                 });
               note.attr('title',"Hello comment");
-               note.tooltip({
-                    alsoResize: $("#container"),
-                    position: {
-                        my: 'left center', at: 'right+10 center'
-                    }
-                  });
+               //activeToolTip(note);
                note.resizable({                
                 stop : function(event,ui) {                    
                     $("#width").val(ui.size.width);
@@ -104,4 +119,18 @@ function saveCSS(e)
     $("#pos_left").val(pos.left)
     $("#width").val(e.width())
     $("#height").val(e.height())
+}
+function activeToolTip(dom)
+{
+    dom.tooltip({
+        position: {
+            my: "bottom",
+            at: "top-13",
+            collision: "flip",
+            using: function (position, feedback) {
+                $(this).addClass(feedback.vertical)
+                    .css(position);
+            }
+        }
+    });
 }

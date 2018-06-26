@@ -1,6 +1,8 @@
 @extends('layouts.default')
 
 @section('extends_style')
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link rel="stylesheet" href="{{URL::asset('css/jquery-ui.min.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
 @stop
@@ -17,8 +19,9 @@
             <div id="container">
                 <img id="image" src="{{URL::asset($image->file_path) }}" />
                 @foreach($image->image_note as $item => $note)
-                <div class="noted" style="top: {{$note->pos_top}}px; left: {{$note->pos_left}}px; width: {{$note->width}}px; height: {{$note->height}}px" title="{{$note->comment}}">
+                <div class="noted" data-id="{{$note->id}}" style="top: {{$note->pos_top}}px; left: {{$note->pos_left}}px; width: {{$note->width}}px; height: {{$note->height}}px" title="{{$note->comment}}">
                     <span class="tip-num">{{$item+1}}</span>
+                    <i class="fa fa-trash flr hide"></i>
                 </div>
                 @endforeach
             </div>

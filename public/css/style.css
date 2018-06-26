@@ -1,11 +1,13 @@
 #container{
     border: 1px solid #c3c3c3;
-    cursor: crosshair;
     position: relative;
     -moz-user-select: none;
     -webkit-user-select: none;
     user-select: none;
     float: left;
+}
+#image{
+        cursor: crosshair;
 }
 .note{    
     display: none;
@@ -28,10 +30,13 @@
 .note:hover{    
     cursor: move;
 }
+.noted:hover i{
+    display: block;
+}
 .noted:hover{    
     cursor: pointer;
 }
-note:hover>span{
+.note:hover>span{
     background-color: #ffba00;
     color: #fff;
 }
@@ -75,4 +80,55 @@ note:hover>span{
   
 img{
     max-width: 800px;
+}
+
+.ui-tooltip {
+			width: 30rem;
+            max-height: 25rem;
+            text-overflow: ellipsis;
+			text-align: center;
+			box-shadow: none;
+			padding: 0;
+		}
+.ui-tooltip-content {
+    position: relative;
+    padding: 0.5em;
+}
+.ui-tooltip-content::after, .ui-tooltip-content::before {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    display: block;
+    left: 9rem;
+}
+.bottom .ui-tooltip-content::before {
+    bottom: -12px;
+    border-color: #5be96e transparent;
+    border-width: 9px 8px 0;
+}
+.bottom .ui-tooltip-content::after {
+    bottom: -7px;
+    border-color: white transparent;
+    border-width: 0 0 0 0;
+}
+.top .ui-tooltip-content::before {
+    top: -12px;
+    border-color: #5be96e transparent;
+    border-width: 0 8px 9px;
+}
+.top .ui-tooltip-content::after {
+    top: -7px;
+    border-color: white transparent;
+    border-width: 0 0 0;
+}
+.flr{
+    float: right !important;
+}
+
+
+.fll{
+    float: left !important;
+}
+.hide{
+    display: none;
 }
