@@ -16,6 +16,7 @@ class ImageNote extends Migration
         Schema::create('image_note', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('image_id');
+            $table->integer('pos');
             $table->float('pos_top');
             $table->float('pos_left');
             $table->float('width');

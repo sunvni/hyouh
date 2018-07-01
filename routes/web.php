@@ -40,6 +40,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('image/{image}/edit','TaskController@editImage')->name('task.image.edit');
 
+    Route::delete('image/','TaskController@deleteImage')->name('task.image.delete');
+
     Route::post('image/{image}','TaskController@addNote')->name('task.image.addnote');
+    
+    Route::delete('image/note','TaskController@deleteNote')->name('image.note.delete');
     
 });

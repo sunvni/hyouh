@@ -191,4 +191,14 @@ class TaskController extends Controller
         $note->save();
         return Redirect::route('task.image.edit',$image_id);
     }
+
+    public function deleteNote(Request $request)
+    {
+        $response = array('result'=>true);        
+        $note = ImageNote::find($request->get('id'));
+        $image = $note->image;
+        $response['count'] = $image->image_note->count();
+        $note->delete();
+        return json_encode($response);
+    }
 }

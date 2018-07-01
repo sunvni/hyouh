@@ -16,12 +16,12 @@
 <hr>
 <div class="row">
         <div class="col-md-12">
-            <div id="container">
-                <img id="image" src="{{URL::asset($image->file_path) }}" />
+            <div id="container" class="no-touch">
+                <img id="image" src="{{URL::asset($image->file_path) }}" draggable="false"/>
                 @foreach($image->image_note as $item => $note)
                 <div class="noted" data-id="{{$note->id}}" style="top: {{$note->pos_top}}px; left: {{$note->pos_left}}px; width: {{$note->width}}px; height: {{$note->height}}px" title="{{$note->comment}}">
                     <span class="tip-num">{{$item+1}}</span>
-                    <i class="fa fa-trash flr hide"></i>
+                    <i class="fa fa-trash flr hide del-btn" onclick="deleteNote({{$note->id}})"></i>
                 </div>
                 @endforeach
             </div>
@@ -59,5 +59,39 @@
 
 @section('extends_script')
 <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
-<script src="{{URL::asset('js/main.js')}}"></script>
+@if($agent->isMobile())
+<script src="{{URL::asset('js/jquery.ui.touch-punch.js')}}"></script>
+<script src="{{URL::asset('js/image.mobi.js')}}"></script>
+@else
+<script src="{{URL::asset('js/image.js')}}"></script>
+@endif
+
+
+<script>
+
+function deleteNote(id) {
+    $.ajax({
+        type: "DELETE",
+        url: '{{route("image.note.delete")}}',
+        data: { 
+            "id": id, 
+            "_token": '{!! csrf_token() !!}'
+        },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if(data['result'] == true)
+            {
+                $(".noted[data-id="+id+"]").addClass('hide');               
+            }
+            else{
+                alert('Wrong');
+            }
+        },
+        error: function(error)
+        {
+            console.error(error.responseText);            
+        }
+    })
+}
+</script>
 @stop

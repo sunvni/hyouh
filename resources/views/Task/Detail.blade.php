@@ -1,4 +1,5 @@
 @extends('layouts.default')
+
 @section('content')
 
 <h2>{{$task->name}}</h2>
@@ -10,7 +11,9 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <div id="container">
+            <div id="
+            
+            ">
                 <a href="{{route('task.image.edit',[$image->id])}}">
                     <img class="image" src="{{URL::asset($image->file_path) }}" />
                 </a>
@@ -19,6 +22,7 @@
                     <span class="tip-num">{{$item+1}}</span>
                 </div>
                 @endforeach
+                <a href="" class="del-imgage" onclick="deleteImage({{$image->id}})"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>
@@ -33,6 +37,33 @@
 @section('extends_script')
 <script src="{{URL::asset('js/jquery-ui.min.js')}}"></script>
 <script>
+    function deleteImage(id) {
+        $.ajax({
+        type: "DELETE",
+        url: '{{route("task.image.delete")}}',
+        data: { 
+            "id": id, 
+            "_token": '{!! csrf_token() !!}'
+        },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if(data['result'] == true)
+            {
+                $(".noted[data-id="+id+"]").addClass('hide');               
+            }
+            else{
+                alert('Wrong');
+            }
+        },
+        error: function(error)
+        {
+            console.error(error.responseText);            
+        }
+    })
+        
+    }
+    
+
    $(document).tooltip({
         position: {
             my: "bottom",
@@ -48,8 +79,7 @@
 @stop
 
 @section('extends_style')
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link rel="stylesheet" href="{{URL::asset('css/jquery-ui.min.css')}}">
 <link rel="stylesheet" href="{{URL::asset('css/style.css')}}">
 @stop
-
-
