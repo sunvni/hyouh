@@ -11,9 +11,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <div id="
-            
-            ">
+            <div class="image-container" data-image-id="{{$image->id}}">
                 <a href="{{route('task.image.edit',[$image->id])}}">
                     <img class="image" src="{{URL::asset($image->file_path) }}" />
                 </a>
@@ -46,13 +44,9 @@
             "_token": '{!! csrf_token() !!}'
         },
         success: function (response) {
-            var data = JSON.parse(response);
-            if(data['result'] == true)
+            if(response == true)
             {
-                $(".noted[data-id="+id+"]").addClass('hide');               
-            }
-            else{
-                alert('Wrong');
+                $('[data-image-id='+id+']').remove();
             }
         },
         error: function(error)

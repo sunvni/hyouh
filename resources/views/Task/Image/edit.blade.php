@@ -16,11 +16,11 @@
 <hr>
 <div class="row">
         <div class="col-md-12">
-            <div id="container" class="no-touch">
+            <div id="container" class="no-touch image-container">
                 <img id="image" src="{{URL::asset($image->file_path) }}" draggable="false"/>
                 @foreach($image->image_note as $item => $note)
                 <div class="noted" data-id="{{$note->id}}" style="top: {{$note->pos_top}}px; left: {{$note->pos_left}}px; width: {{$note->width}}px; height: {{$note->height}}px" title="{{$note->comment}}">
-                    <span class="tip-num">{{$item+1}}</span>
+                    <span class="tip-num">{{$note->pos}}</span>
                     <i class="fa fa-trash flr hide del-btn" onclick="deleteNote({{$note->id}})"></i>
                 </div>
                 @endforeach
@@ -42,6 +42,8 @@
                 {{ Form::text('width', Input::old('width'), array('class' => 'form-control')) }}
                 {{ Form::label('height', 'Height') }}
                 {{ Form::text('height', Input::old('height'), array('class' => 'form-control')) }}
+                {{ Form::label('pos', 'Position') }}
+                {{ Form::text('pos', Input::old('pos')?Input::old('pos'):1, array('class' => 'form-control')) }}
             </div>
              <div class="form-group">
                 {{ Form::label('comment', 'Comment') }}

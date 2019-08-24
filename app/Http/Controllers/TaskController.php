@@ -186,6 +186,7 @@ class TaskController extends Controller
         $note->pos_left = Input::get('pos_left');
         $note->width = Input::get('width');
         $note->height = Input::get('height');
+        $note->pos = Input::get('pos');
         $note->comment = Input::get('comment');
         $note->image_id = $image_id;
         $note->save();
@@ -200,5 +201,13 @@ class TaskController extends Controller
         $response['count'] = $image->image_note->count();
         $note->delete();
         return json_encode($response);
+    }
+
+    
+    public function deleteImage(Request $request)
+    {
+        $image = Image::find($request->get('id'));
+        $image->delete();
+        return true;
     }
 }
